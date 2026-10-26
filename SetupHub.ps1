@@ -568,7 +568,7 @@ function Install-CustomPackage {
     $packageType = ([string]$Item.PackageType).ToUpperInvariant()
     if ($packageType -notin @('EXE','MSI','MSIX','MSIXBUNDLE')) { throw "Unsupported installer type: $packageType" }
     if ($packageType -eq 'EXE' -and [string]::IsNullOrWhiteSpace([string]$Item.SilentArgs)) {
-        throw 'Add the installer vendor's documented silent arguments before installing this EXE.'
+        throw 'Add the documented silent arguments for this installer before installing this EXE.'
     }
 
     $downloadRoot = Join-Path $script:DataRoot 'Downloads'
@@ -652,7 +652,7 @@ function Save-CustomAppFromDialog {
         return
     }
     if ($packageType -eq 'EXE' -and [string]::IsNullOrWhiteSpace($values.SilentArgs)) {
-        [System.Windows.MessageBox]::Show('Enter the installer vendor's documented silent arguments for this EXE. There is no universal silent flag.', 'Silent arguments required', [System.Windows.MessageBoxButton]::OK, [System.Windows.MessageBoxImage]::Warning) | Out-Null
+        [System.Windows.MessageBox]::Show('Enter the documented silent arguments for this EXE. There is no universal silent flag.', 'Silent arguments required', [System.Windows.MessageBoxButton]::OK, [System.Windows.MessageBoxImage]::Warning) | Out-Null
         return
     }
     if (-not [string]::IsNullOrWhiteSpace($values.IconUrl)) {
